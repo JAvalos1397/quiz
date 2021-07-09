@@ -17,7 +17,7 @@ body {
     background-color: hsl(var(--nuetral),100%,20%);
 }
 .btn {
-    background-color: rgb(11, 166, 228);
+    background-color: hsl(var(--nuetral),100%,50%);
     color: white;
     font-size: 30px;
     width: 100%;
@@ -47,7 +47,7 @@ body.wrong {
     width: 800px;
     max-width: 80%;
     background-color: white;
-    border-radius: 5%;
+    border-radius: 10px;
     padding: 10px; 
 }
 .btn.correct {
@@ -56,10 +56,11 @@ body.wrong {
 .btn.wrong {
     background-color: hsl(var(--wrong),100%,20%);
 }
-.start-btn {
+.start-btn,.next-btn {
     font-size: 1.5rem;
     font-weight: :bold;
-    padding: 10px 20px;
+    padding: 10px 20px;    
+    
 }
 .control {
     display: flex;
