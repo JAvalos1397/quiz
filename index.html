@@ -8,25 +8,29 @@
     <link rel='stylesheet' href = "./Assets/style.css">
 </head>
 <body >
-<div class="container">
-    <div class="hide">
-        <h1 id="question">
-            Question
-        </h1>
-        <ul id="answer-btn">
-            <li class="answer"><button class="btn">Answer 1</button></li>
-            <li class="answer"><button class="btn">Answer 2</button></li>
-            <li class="answer"><button class="btn">Answer 3</button></li>
-            <li class="answer"><button class="btn">Answer 4</button></li>
-        </ul>
-    </div>
-    
-    <div class="control">
-        <button id="start-btn" class="start-btn btn">Start</button>
-        <button id="next-btn" class="next-btn btn hide">Next</button>
+<div class="quiz">
+    <div class="timer"></div>
+    <div class="container">
+        <div class="hide" id="questionContainer">
+            <h1 id="question">
+                Question
+            </h1>
 
+            <ul id="answer-btn">
+                <li class="answer"><button class="btn">Answer 1</button></li>
+                <li class="answer"><button class="btn">Answer 2</button></li>
+                <li class="answer"><button class="btn">Answer 3</button></li>
+                <li class="answer"><button class="btn">Answer 4</button></li>
+            </ul>
+        </div>
+        
+        <div class="control">
+            <button id="start-btn" class="start-btn btn">Start</button>
+            <!-- <button id="next-btn" class="next-btn btn hide">Next</button> -->
+
+        </div>
     </div>
 </div>
-<script src="./Assets/script.js"></script>
+    <script src="./Assets/script.js"></script>
 </body>
 </html>
