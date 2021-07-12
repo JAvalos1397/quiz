@@ -4,7 +4,6 @@ var answerBtnEl = document.getElementById('answer-btn')
 var questionEl = document.getElementById('question')
 var timerEl = document.getElementById('timerContainer')
 
-let shuffledQuestion, currentQuestionIndex
 
 
 startButton.addEventListener('click', function() {

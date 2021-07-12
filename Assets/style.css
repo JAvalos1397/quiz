@@ -35,6 +35,20 @@ body {
     padding: 10px;
     margin: 10px;
 }
+header {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    margin: 10px 30%;
+    width: fit-content;
+    background-color:white ;
+}
+
+h1 {
+    background-color: hsl(var(--nuetral),100%,50%);
+    margin: 5px;
+    color: white;
+}
 
 .btn {
     background-color: hsl(var(--nuetral),100%,50%);
@@ -53,7 +67,7 @@ ul {
     font-size: 40px;
     margin-left: 10%;
 }
-h1 {
+#question {
     margin-left: 10%;
 }
 body.correct {
@@ -76,7 +90,7 @@ body.wrong {
 .btn.wrong {
     background-color: hsl(var(--wrong),100%,20%);
 }
-.start-btn,.next-btn {
+.start-btn {
     font-size: 1.5rem;
     font-weight: :bold;
     padding: 10px 20px;    
