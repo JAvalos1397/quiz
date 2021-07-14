@@ -4,8 +4,12 @@ var answerContainerEl = document.getElementById('answer-container')
 var questionEl = document.getElementById('question')
 var timerEl = document.getElementById('timerContainer')
 var answerBtnEl = document.getElementsByClassName("answer-btn")
+var endGameContainerEl = document.getElementById('endGame')
+var quizContainerEl = document.getElementsByClassName("quiz")
 
-
+var form = 
+var initial = document.getElementById('initialText')
+var highScore = [];
 
 startButton.addEventListener('click', function() {
     startGame();
@@ -19,32 +23,37 @@ startButton.addEventListener('click', function() {
 function countdown() {
 timerEl.classList.remove("hide")
 var secondsLeft = 100;
+
 var timer = setInterval(function(){
         secondsLeft--;
         document.getElementById("timer").textContent= secondsLeft;
 
-        if(secondsLeft === 0){
+        if(question.length == currentQuestionIndex + 1){
+            clearInterval(timer);
+            highScore.push(secondsLeft);
+            console.log(secondsLeft);
+            localStorage.setItem("highScore", JSON.stringify(highScore))
+            
+        } else if(secondsLeft === 0 ){
         clearInterval(timer);
-        
-        //finish game
+        highScore.push(secondsLeft);
+        localStorage.setItem("highScore", JSON.stringify(highScore))
+               
         }
+        
   }, 1000);
 }
 
-function highScore() {
-
-}
-
 function startGame() {
-    // console.log('Started');
     startButton.classList.add("hide");
-    shuffledQuestion = question.sort(() => Math.random() - .5)
-    currentQuestionIndex= 0
-    questionContainerEl.classList.remove("hide")
-    setNextQuestion()
+    shuffledQuestion = question.sort(() => Math.random() - .5); //shuffle my question
+    currentQuestionIndex= 0; // sets the first question
+    questionContainerEl.classList.remove("hide");
+    setNextQuestion();
 }
 
 function setNextQuestion() {
+    resetAnswer() 
     showQuestion(shuffledQuestion[currentQuestionIndex])
 }
 
@@ -54,20 +63,63 @@ function showQuestion(question) {
         var button = document.createElement('button');
         button.innerText = answer.text;
         button.classList.add("answer-btn");
-        answerBtnEl.addEventListener("click", selectAnswer);
+        button.addEventListener("click", function(){
+            selectAnswer()
+        });
         answerContainerEl.appendChild(button);
-      
-    })
+          })
 }
 
-function selectAnswer() {
-   if (question.answer === false){
-       console.log("false")
-       secondsLeft - 10;
-   }
+
+function selectAnswer() {   
+   if (question.length <= currentQuestionIndex + 1 ) {
+    console.log("end game")
+    endGame()
+ 
+} else {
    currentQuestionIndex ++
    setNextQuestion()
+    }
 }
+
+//fixes bug where old answer button stayed on screen
+function resetAnswer(){
+    while (answerContainerEl.firstChild) {
+        answerContainerEl.removeChild(answerContainerEl.firstChild)
+    }
+}
+
+//game Ender supposed to save time > then unhide End game card
+function endGame() {
+    questionContainerEl.classList.add("hide");
+    // quizContainerEl.classList.remove("hide");
+    endGameContainerEl.classList.remove('hide');
+
+}
+
+document.getElementById('initialForm').addEventListener("submit", function(){
+    saveScore()
+    renderScore()
+})
+
+function saveScore() {
+    var score = {
+        time: highScore,
+        name: document.getElementById('initialText').value,
+    }
+    localStorage.setItem("score", JSON.stringify(score));
+}
+
+function renderScore() {
+    var ScoreRender = JSON.parse(localStorage.getItem("score"));
+    if (lastGrade !== null) {
+        document.getElementById("initial").innerHTML = ScoreRender.student;//problem child 
+        document.getElementById("score").innerHTML = ScoreRender.grade;//problem child
+        
+      } else {
+        return;
+      }
+    }
 
 var question = [
     {
@@ -96,5 +148,70 @@ var question = [
             {text:"350", correct: true },
             {text:"410", correct: false }
         ]
-    }
+    },
+    {
+        question: "What is 10+20?!",
+        answer: [
+            {text:"10", correct: false},
+            {text:"245", correct: false },
+            {text:"350", correct: true },
+            {text:"410", correct: false }
+        ]
+    },
+    // {
+    //     question: "What is 10+20?!",
+    //     answer: [
+    //         {text:"10", correct: false},
+    //         {text:"245", correct: false },
+    //         {text:"350", correct: true },
+    //         {text:"410", correct: false }
+    //     ]
+    // },
+    // {
+    //     question: "What is 10+20?!",
+    //     answer: [
+    //         {text:"10", correct: false},
+    //         {text:"245", correct: false },
+    //         {text:"350", correct: true },
+    //         {text:"410", correct: false }
+    //     ]
+    // },
+    // {
+    //     question: "What is 10+20?!",
+    //     answer: [
+    //         {text:"10", correct: false},
+    //         {text:"245", correct: false },
+    //         {text:"350", correct: true },
+    //         {text:"410", correct: false }
+    //     ]
+    // },
+    // {
+    //     question: "What is 10+20?!",
+    //     answer: [
+    //         {text:"10", correct: false},
+    //         {text:"245", correct: false },
+    //         {text:"350", correct: true },
+    //         {text:"410", correct: false }
+    //     ]
+    // },
+    // {
+    //     question: "What is 10+20?!",
+    //     answer: [
+    //         {text:"10", correct: false},
+    //         {text:"245", correct: false },
+    //         {text:"350", correct: true },
+    //         {text:"410", correct: false }
+    //     ]
+    // },
+    // {
+    //     question: "What is 10+20?!",
+    //     answer: [
+    //         {text:"10", correct: false},
+    //         {text:"245", correct: false },
+    //         {text:"350", correct: true },
+    //         {text:"410", correct: false }
+    //     ]
+    // },
 ]
+
+

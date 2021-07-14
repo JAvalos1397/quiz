@@ -2,9 +2,7 @@
     /* border: 2px solid black; */
 }
 :root {
-    --nuetral: 200;
-    --wrong: 0;
-    --correct:145;
+    --blue: 200;
 }
 body {
     display: flex;
@@ -14,7 +12,7 @@ body {
     align-items: center;
     height:100vh;
     width: 100vw;
-    background-color: hsl(var(--nuetral),100%,20%);
+    background-color: hsl(var(--blue),100%,20%);
 }
 
 .timer{
@@ -28,13 +26,14 @@ body {
     background-color: white;
 }
 .timer p{
-    background-color: hsl(var(--nuetral),100%,50%);
+    background-color: hsl(var(--blue),100%,50%);
      color: white;
     font-size: 500%;
     width:100%;
     padding: 10px;
     margin: 10px;
 }
+
 header {
     display: flex;
     justify-self: center;
@@ -45,14 +44,14 @@ header {
 }
 
 h1 {
-    background-color: hsl(var(--nuetral),100%,50%);
+    background-color: hsl(var(--blue),100%,50%);
     margin: 5px;
     padding: 5px;
     color: white;
 }
 
 .answer-btn {
-    background-color: hsl(var(--nuetral),100%,50%);
+    background-color: hsl(var(--blue),100%,50%);
     color: white;
     font-size: 30px;
     width: 100%;
@@ -74,25 +73,12 @@ ul {
     font-size: 200%;
     margin: auto;
 }
-body.correct {
-    background-color: hsl(var(--correct),100%,20%);
-}
-body.wrong {
-    background-color: hsl(var(--wrong),100%,20%);
-}
-
 .container {
     width: 800px;
     max-width: 80%;
     background-color: white;
     border-radius: 10px;
     padding: 10px; 
-}
-.btn.correct {
-    background-color: hsl(var(--correct),100%,20%);
-}
-.btn.wrong {
-    background-color: hsl(var(--wrong),100%,20%);
 }
 .start-btn {
     font-size: 1.5rem;
@@ -102,9 +88,40 @@ body.wrong {
     width: 100%;
     margin: 5px;  
     color: white;
-    background-color: hsl(var(--nuetral),100%,50%);
+    background-color: hsl(var(--blue),100%,50%);  
+}
 
+.endGame {
+    display: flex;
+    height: 40vh;
+    margin-bottom: 25%;
+    background-color: white;
+}
+.highScore {
+    background-color: hsl(var(--blue),100%,50%);  
+    border: 5px solid hsl(var(--blue),100%,30%);
+    margin: 10px;
+    padding: 5px;
     
+}
+#score,#initial {
+    display: inline-block;
+    color: white;
+    font-size: 200%;
+    width: fit-content;
+}
+#score {
+    margin-left: 25%;
+}
+form {
+    border: 2px solid black;
+    margin-top: 50%;
+    color: white;
+    font-size: larger;
+    padding: 2px;
+}
+#initialText {
+    width: 100px;
 }
 .control {
     display: flex;
