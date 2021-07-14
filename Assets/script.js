@@ -5,10 +5,10 @@ var questionEl = document.getElementById('question')
 var timerEl = document.getElementById('timerContainer')
 var answerBtnEl = document.getElementsByClassName("answer-btn")
 var endGameContainerEl = document.getElementById('endGame')
-var quizContainerEl = document.getElementsByClassName("quiz")
+var quizContainerEl = document.getElementById("quiz")
 
-var form = 
-var initial = document.getElementById('initialText')
+// var form = 
+// var initial = document.getElementById('initialText');
 var highScore = [];
 
 startButton.addEventListener('click', function() {
@@ -37,8 +37,7 @@ var timer = setInterval(function(){
         } else if(secondsLeft === 0 ){
         clearInterval(timer);
         highScore.push(secondsLeft);
-        localStorage.setItem("highScore", JSON.stringify(highScore))
-               
+        localStorage.setItem("highScore", JSON.stringify(highScore))      
         }
         
   }, 1000);
@@ -64,6 +63,7 @@ function showQuestion(question) {
         button.innerText = answer.text;
         button.classList.add("answer-btn");
         button.addEventListener("click", function(){
+            console.log("clicked",answer.correct)
             selectAnswer()
         });
         answerContainerEl.appendChild(button);
@@ -91,15 +91,17 @@ function resetAnswer(){
 
 //game Ender supposed to save time > then unhide End game card
 function endGame() {
-    questionContainerEl.classList.add("hide");
-    // quizContainerEl.classList.remove("hide");
+    // questionContainerEl.classList.add("hide");
+    quizContainerEl.classList.add("hide");
     endGameContainerEl.classList.remove('hide');
 
 }
 
-document.getElementById('initialForm').addEventListener("submit", function(){
-    saveScore()
-    renderScore()
+document.getElementById('initialForm').addEventListener("submit", function(event){
+    event.preventDefault();
+    saveScore();
+    renderScore();
+    document.getElementById('initialForm').classList.add('hide')
 })
 
 function saveScore() {
@@ -111,10 +113,11 @@ function saveScore() {
 }
 
 function renderScore() {
+
     var ScoreRender = JSON.parse(localStorage.getItem("score"));
-    if (lastGrade !== null) {
-        document.getElementById("initial").innerHTML = ScoreRender.student;//problem child 
-        document.getElementById("score").innerHTML = ScoreRender.grade;//problem child
+    if (ScoreRender !== null) {
+        document.getElementById("initial").innerHTML = ScoreRender.name; 
+        document.getElementById("score").innerHTML = ScoreRender.time;
         
       } else {
         return;

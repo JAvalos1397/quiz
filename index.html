@@ -8,7 +8,7 @@
     <link rel='stylesheet' href = "./Assets/style.css">
 </head>
 <body >
-<div class="quiz hide">
+<div class="quiz" id="quiz">
     <div class="timer hide" id="timerContainer">
         <p id="timer">100</p>
     </div>
@@ -35,10 +35,10 @@
         </div>
     </div>
 </div>
-<div class="endGame" id="endGame">
+<div class="endGame hide" id="endGame">
 <div class="highScore">
-    <div id="initial">JAA</div>
-    <div id="score">100</div>
+    <div id="initial"></div>
+    <div id="score"></div>
     <form id="initialForm">
         <label for="initialText">Enter Initial: </label>
     <input type="text" placeholder="_ _ _" maxlength="3" name="initialText" id="initialText">
