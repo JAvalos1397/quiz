@@ -11,48 +11,45 @@ var quizContainerEl = document.getElementById("quiz")
 // var initial = document.getElementById('initialText');
 var highScore = [];
 
-startButton.addEventListener('click', function() {
+startButton.addEventListener('click', function () {
     startGame();
     countdown();
 })
 
-// This is the next button use this to go to the next answer
-
-
 //This timer will count down when the game starts 
-function countdown() {
-timerEl.classList.remove("hide")
 var secondsLeft = 100;
 
-var timer = setInterval(function(){
+function countdown() {
+    timerEl.classList.remove("hide")
+    var timer = setInterval(function () {
         secondsLeft--;
-        document.getElementById("timer").textContent= secondsLeft;
+        document.getElementById("timer").textContent = secondsLeft;
 
-        if(question.length == currentQuestionIndex + 1){
+        if (question.length == currentQuestionIndex + 1) {
             clearInterval(timer);
             highScore.push(secondsLeft);
-            console.log(secondsLeft);
+            // console.log(secondsLeft);
             localStorage.setItem("highScore", JSON.stringify(highScore))
-            
-        } else if(secondsLeft === 0 ){
-        clearInterval(timer);
-        highScore.push(secondsLeft);
-        localStorage.setItem("highScore", JSON.stringify(highScore))      
+
+        } else if (secondsLeft <= 0) {
+            clearInterval(timer);
+            highScore.push(secondsLeft);
+            localStorage.setItem("highScore", JSON.stringify(highScore))
         }
-        
-  }, 1000);
+
+    }, 1000);
 }
 
 function startGame() {
     startButton.classList.add("hide");
     shuffledQuestion = question.sort(() => Math.random() - .5); //shuffle my question
-    currentQuestionIndex= 0; // sets the first question
+    currentQuestionIndex = 0; // sets the first question
     questionContainerEl.classList.remove("hide");
     setNextQuestion();
 }
 
 function setNextQuestion() {
-    resetAnswer() 
+    resetAnswer()
     showQuestion(shuffledQuestion[currentQuestionIndex])
 }
 
@@ -62,28 +59,31 @@ function showQuestion(question) {
         var button = document.createElement('button');
         button.innerText = answer.text;
         button.classList.add("answer-btn");
-        button.addEventListener("click", function(){
-            console.log("clicked",answer.correct)
+        button.addEventListener("click", function () {
+            if (answer.correct === false) {
+                // console.log(secondsLeft)
+                secondsLeft = secondsLeft - 20;                
+            }
             selectAnswer()
         });
         answerContainerEl.appendChild(button);
-          })
+    })
 }
 
 
-function selectAnswer() {   
-   if (question.length <= currentQuestionIndex + 1 ) {
-    console.log("end game")
-    endGame()
- 
-} else {
-   currentQuestionIndex ++
-   setNextQuestion()
+function selectAnswer() {
+    if (question.length <= currentQuestionIndex + 1) {
+        // console.log("end game")
+        endGame()
+
+    } else {
+        currentQuestionIndex++
+        setNextQuestion()
     }
 }
 
 //fixes bug where old answer button stayed on screen
-function resetAnswer(){
+function resetAnswer() {
     while (answerContainerEl.firstChild) {
         answerContainerEl.removeChild(answerContainerEl.firstChild)
     }
@@ -97,7 +97,7 @@ function endGame() {
 
 }
 
-document.getElementById('initialForm').addEventListener("submit", function(event){
+document.getElementById('initialForm').addEventListener("submit", function (event) {
     event.preventDefault();
     saveScore();
     renderScore();
@@ -116,105 +116,105 @@ function renderScore() {
 
     var ScoreRender = JSON.parse(localStorage.getItem("score"));
     if (ScoreRender !== null) {
-        document.getElementById("initial").innerHTML = ScoreRender.name; 
+        document.getElementById("initial").innerHTML = ScoreRender.name;
         document.getElementById("score").innerHTML = ScoreRender.time;
-        
-      } else {
+
+    } else {
         return;
-      }
     }
+}
 
 var question = [
     {
-        question: "What is 5+5?!",
+        question: "What was the first Pixar film to be made?",
         answer: [
-            {text:"10", correct: true},
-            {text:"225", correct: false },
-            {text:"305", correct: false },
-            {text:"430", correct: false }
+            { text: "Toy Story", correct: true },
+            { text: "Monster, Inc", correct: false },
+            { text: "Finding Nemo", correct: false },
+            { text: "Cars", correct: false }
         ]
     },
     {
-        question: "What is 5+20?!",
+        question: "What is the name of the girl in Inside Out?",
         answer: [
-            {text:"510", correct: false},
-            {text:"25", correct: true },
-            {text:"340", correct: false },
-            {text:"450", correct: false }
+            { text: "Boo", correct: false },
+            { text: "Riley", correct: true },
+            { text: "Dot", correct: false },
+            { text: "Colette", correct: false }
         ]
     },
     {
-        question: "What is 10+20?!",
+        question: "What is the name of this menacing shark in Finding Nemo?",
         answer: [
-            {text:"10", correct: false},
-            {text:"245", correct: false },
-            {text:"350", correct: true },
-            {text:"410", correct: false }
+            { text: "Bob", correct: false },
+            { text: "Roger", correct: false },
+            { text: "Bruce", correct: true },
+            { text: "Kevin", correct: false }
         ]
     },
     {
-        question: "What is 10+20?!",
+        question: "What is the name of The Incredibles' main enemy?",
         answer: [
-            {text:"10", correct: false},
-            {text:"245", correct: false },
-            {text:"350", correct: true },
-            {text:"410", correct: false }
+            { text: "bomb voyage", correct: false },
+            { text: "Mezmerella ", correct: false },
+            { text: "The Underminer", correct: false },
+            { text: "Syndrome", correct: true }
         ]
     },
-    // {
-    //     question: "What is 10+20?!",
-    //     answer: [
-    //         {text:"10", correct: false},
-    //         {text:"245", correct: false },
-    //         {text:"350", correct: true },
-    //         {text:"410", correct: false }
-    //     ]
-    // },
-    // {
-    //     question: "What is 10+20?!",
-    //     answer: [
-    //         {text:"10", correct: false},
-    //         {text:"245", correct: false },
-    //         {text:"350", correct: true },
-    //         {text:"410", correct: false }
-    //     ]
-    // },
-    // {
-    //     question: "What is 10+20?!",
-    //     answer: [
-    //         {text:"10", correct: false},
-    //         {text:"245", correct: false },
-    //         {text:"350", correct: true },
-    //         {text:"410", correct: false }
-    //     ]
-    // },
-    // {
-    //     question: "What is 10+20?!",
-    //     answer: [
-    //         {text:"10", correct: false},
-    //         {text:"245", correct: false },
-    //         {text:"350", correct: true },
-    //         {text:"410", correct: false }
-    //     ]
-    // },
-    // {
-    //     question: "What is 10+20?!",
-    //     answer: [
-    //         {text:"10", correct: false},
-    //         {text:"245", correct: false },
-    //         {text:"350", correct: true },
-    //         {text:"410", correct: false }
-    //     ]
-    // },
-    // {
-    //     question: "What is 10+20?!",
-    //     answer: [
-    //         {text:"10", correct: false},
-    //         {text:"245", correct: false },
-    //         {text:"350", correct: true },
-    //         {text:"410", correct: false }
-    //     ]
-    // },
+    {
+        question: "Horst, from Ratatouille, claims to have killed man with what?",
+        answer: [
+            {text:"Thumb", correct: true},
+            {text:"Knife", correct: false },
+            {text:"Food Poison", correct: false },
+            {text:"Boredom", correct: false }
+        ]
+    },
+    {
+        question: "Brave is set in which country?",
+        answer: [
+            {text:"England", correct: false},
+            {text:"Scotland", correct: true },
+            {text:"Tatooine", correct: false },
+            {text:"Wales", correct: false }
+        ]
+    },
+    {
+        question: "In Coco, what song did Miguel use to Compete",
+        answer: [
+            {text:"Remember me", correct: false},
+            {text:"La Llorona", correct: false },
+            {text:"Un Poco Loco", correct: true },
+            {text:"Proud Corazon", correct: false }
+        ]
+    },
+    {
+        question: "Which of these emotions is not a character in Pixar’s Inside Out?",
+        answer: [
+            {text:"Sadness", correct: false},
+            {text:"Joy", correct: false },
+            {text:"Anger", correct: false },
+            {text:"Surprise", correct: true }
+        ]
+    },
+    {
+        question: "This Toy Story actor has provided vocal work in all of Pixar's feature films:",
+        answer: [
+            {text:"John Ratzenberger", correct: true},
+            {text:"Wallace Shawn", correct: false },
+            {text:"Tim Allen", correct: false },
+            {text:"Tom Hanks", correct: false }
+        ]
+    },
+    {
+        question: "Which movie musical is robot WALL-E fond of watching in WALL-E?",
+        answer: [
+            {text:"Grease", correct: false},
+            {text:"Funny Girl", correct: false },
+            {text:"Hello, Dolly!", correct: true },
+            {text:"Mary Poppins", correct: false }
+        ]
+    },
 ]
 
 

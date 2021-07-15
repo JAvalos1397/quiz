@@ -38,7 +38,7 @@ header {
     display: flex;
     justify-self: center;
     align-items: center;
-    margin: 10px 30%;
+    margin: 10px 25%;
     width: fit-content;
     background-color:white ;
 }
@@ -94,7 +94,7 @@ ul {
 .endGame {
     display: flex;
     height: 40vh;
-    margin-bottom: 25%;
+    /* margin-bottom: 25%; */
     background-color: white;
 }
 .highScore {
@@ -106,14 +106,19 @@ ul {
 }
 #score,#initial {
     display: inline-block;
-    text-align: center;
     color: white;
     font-size: 200%;
-    width: 100px;
-    margin-top: 50%;
+    border: 2px solid black;
+    width: 47%;
+    text-align: center;
+    
 }
 #score {
-    /* margin-left: 25%; */
+    position:relative;
+    
+}
+h2 {
+    font-size: 300%;
 }
 form {
     border: 2px solid black;
